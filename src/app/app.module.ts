@@ -8,12 +8,14 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
 
-    NavbarComponent
+    NavbarComponent,
+    
   ],
   imports: [
     BrowserModule,
