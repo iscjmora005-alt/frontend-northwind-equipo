@@ -26,14 +26,17 @@ export class LoginComponent {
       .subscribe({
         next: (respuesta: any) => {
           if (respuesta.error) {
-            // Si Python nos devuelve un error (ej. Contraseña incorrecta)
             this.mensajeError = respuesta.error;
           } else {
-            // Si todo sale bien
-            alert(respuesta.mensaje); // Mostrará "¡Bienvenido(a) Maria!"
+            // ---> LO NUEVO: Guardamos el usuario en la memoria del navegador <---
+            // Lo convertimos a texto (JSON.stringify) porque localStorage solo acepta texto
+            localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
+            
+            alert(respuesta.mensaje); 
             
             // Redirigimos al usuario a la tabla de productos
-            this.router.navigate(['/products']);
+            // Usamos window.location.href para forzar a la página a recargar la barra de navegación
+            window.location.href = '/products'; 
           }
         },
         error: (err) => {

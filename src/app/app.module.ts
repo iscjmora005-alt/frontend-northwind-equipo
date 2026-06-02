@@ -9,12 +9,16 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
 
     NavbarComponent,
+     
+      
     
   ],
   imports: [

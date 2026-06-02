@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Categorías</h2>
+    <button class="btn btn-primary">Nueva Categoría</button>
+  </div>
+
+  <table class="table table-striped table-hover shadow-sm">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of categorias">
+        <td>{{ cat.id }}</td>
+        <td>{{ cat.nombre }}</td>
+        <td>{{ cat.descripcion }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2">Editar</button>
+          <button class="btn btn-danger btn-sm">Eliminar</button>
+        </td>
+      </tr>
+      
+      <tr *ngIf="categorias.length === 0">
+        <td colspan="4" class="text-center text-muted">No hay categorías registradas por el momento.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
