@@ -1,0 +1,34 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Pedidos</h2>
+    <a class="btn btn-primary" routerLink="/pedidos/new">Nuevo Pedido</a>
+  </div>
+
+  <table class="table table-striped table-hover shadow-sm">
+    <thead class="table-dark">
+      <tr>
+        <th>ID Pedido</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidos">
+        <td>#{{ pedido.id }}</td>
+        <td>{{ pedido.cliente }}</td>
+        <!-- Angular formatea la fecha y el dinero por nosotros -->
+        <td>{{ pedido.fecha | date:'shortDate' }}</td>
+        <td>{{ pedido.total | currency }}</td>
+        <td>
+          <button class="btn btn-info btn-sm text-white">Ver Detalle</button>
+        </td>
+      </tr>
+      
+      <tr *ngIf="pedidos.length === 0">
+        <td colspan="5" class="text-center text-muted">Aún no hay pedidos registrados.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

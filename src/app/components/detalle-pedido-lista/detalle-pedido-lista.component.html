@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Detalles de los Pedidos</h2>
+  </div>
+
+  <table class="table table-striped table-hover shadow-sm">
+    <thead class="table-dark">
+      <tr>
+        <th>ID Detalle</th>
+        <th>ID Pedido</th>
+        <th>ID Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let det of detalles">
+        <td>{{ det.id }}</td>
+        <td>#{{ det.pedido_id }}</td>
+        <td>Prod. #{{ det.producto_id }}</td>
+        <td>{{ det.cantidad }}</td>
+        <td>{{ det.precio | currency }}</td>
+      </tr>
+      
+      <tr *ngIf="detalles.length === 0">
+        <td colspan="5" class="text-center text-muted">No hay detalles registrados.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

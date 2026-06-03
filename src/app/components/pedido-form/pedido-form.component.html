@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Registrar Nuevo Pedido</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="guardarPedido()">
+            
+            <div class="mb-3">
+              <label class="form-label">Cliente (Usuario)</label>
+              <select class="form-select" name="usuario_id" [(ngModel)]="pedido.usuario_id" required>
+                <option value="" disabled selected>Selecciona un cliente...</option>
+                <option *ngFor="let user of usuarios" [value]="user.id">
+                  {{ user.nombre }} ({{ user.correo }})
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Total del Pedido ($)</label>
+              <input type="number" step="0.01" class="form-control" name="total" [(ngModel)]="pedido.total" placeholder="Ej. 1500.50" required>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <a routerLink="/pedidos" class="btn btn-secondary">Cancelar</a>
+              <button type="submit" class="btn btn-success">Guardar Pedido</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

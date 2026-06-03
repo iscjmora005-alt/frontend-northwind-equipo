@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './categoria-lista.component.html'
 })
 export class CategoriaListaComponent implements OnInit {
-  // Aquí guardaremos las categorías que lleguen de Python
   categorias: any[] = [];
 
   constructor(private http: HttpClient) {}
@@ -20,15 +19,24 @@ export class CategoriaListaComponent implements OnInit {
   }
 
   obtenerCategorias() {
-    // Apuntamos a la ruta GET de categorías
     this.http.get('http://localhost:3030/api/categorias')
       .subscribe({
-        next: (data: any) => {
-          this.categorias = data;
-        },
-        error: (err) => {
-          console.error("Error al obtener categorías:", err);
-        }
+        next: (data: any) => this.categorias = data,
+        error: (err) => console.error(err)
       });
+  }
+
+  // --- AQUÍ ESTÁ LA FUNCIÓN QUE ANGULAR NO ENCONTRABA ---
+  eliminarCategoria(id: number) {
+    if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
+      this.http.delete('http://localhost:3030/api/categorias/' + id)
+        .subscribe({
+          next: () => {
+            // Si se elimina correctamente, volvemos a pedir la lista actualizada
+            this.obtenerCategorias(); 
+          },
+          error: (err) => console.error("Error al eliminar", err)
+        });
+    }
   }
 }
