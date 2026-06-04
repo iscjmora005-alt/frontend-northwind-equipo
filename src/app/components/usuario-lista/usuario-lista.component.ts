@@ -27,4 +27,18 @@ export class UsuarioListaComponent implements OnInit {
         error: (err) => console.error("Error al cargar usuarios:", err)
       });
   }
+
+  // Agrega esta función dentro de tu clase UsuarioListaComponent
+  eliminarUsuario(id: number) {
+    if (confirm('¿Estás seguro de que deseas eliminar a este usuario?')) {
+      this.http.delete('http://localhost:3030/api/usuarios/' + id)
+        .subscribe({
+          next: () => {
+            // Recargamos la lista tras borrar
+            this.obtenerUsuarios(); 
+          },
+          error: (err) => console.error("Error al eliminar", err)
+        });
+    }
+  }
 }

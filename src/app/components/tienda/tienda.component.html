@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <div class="row">
+    
+    <div class="col-md-8">
+      <h2>Catálogo de Productos</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let prod of productosDisponibles">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ prod.name }}</h5>
+              <p class="card-text text-success fw-bold">{{ prod.price | currency }}</p>
+              <p class="card-text small text-muted">Stock: {{ prod.stock }}</p>
+              <button class="btn btn-primary btn-sm w-100" 
+                      [disabled]="prod.stock <= 0"
+                      (click)="agregarAlCarrito(prod)">
+                {{ prod.stock > 0 ? 'Agregar al Carrito' : 'Agotado' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-header bg-warning text-dark fw-bold">
+          🛒 Mi Carrito
+        </div>
+        <<ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of carrito">
+            <div>
+              <span class="fw-bold">{{ item.name }}</span><br>
+              <small class="text-muted">{{ item.cantidad }} x {{ item.price | currency }}</small>
+            </div>
+            
+            <div class="d-flex align-items-center">
+              <span class="me-3">{{ (item.cantidad * item.price) | currency }}</span>
+              <button class="btn btn-sm btn-outline-danger fw-bold" (click)="eliminarDelCarrito(item.id)">
+                X
+              </button>
+            </div>
+          </li>
+          <li class="list-group-item text-center text-muted" *ngIf="carrito.length === 0">
+            El carrito está vacío
+          </li>
+        </ul>
+        
+        <div class="card-footer bg-light">
+          <div class="d-flex justify-content-between fs-5 fw-bold mb-3">
+            <span>Total:</span>
+            <span>{{ calcularTotal() | currency }}</span>
+          </div>
+          <button class="btn btn-success w-100 fs-5" 
+                  [disabled]="carrito.length === 0" 
+                  (click)="realizarCompra()">
+            Pagar y Finalizar Compra
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

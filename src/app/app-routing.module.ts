@@ -10,21 +10,38 @@ import { UsuarioListaComponent } from './components/usuario-lista/usuario-lista.
 import { PedidoListaComponent } from './components/pedido-lista/pedido-lista.component';
 import { PedidoFormComponent } from './components/pedido-form/pedido-form.component';
 import { DetallePedidoListaComponent } from './components/detalle-pedido-lista/detalle-pedido-lista.component';
+import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
+import { authGuard } from './auth.guard';
+import { TiendaComponent } from './components/tienda/tienda.component';
+import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
-  { path: 'products', component: ProductListComponent },
-  { path: 'products/new', component: ProductFormComponent },
-  { path: 'products/edit/:id', component: ProductFormComponent },
+  // --- 1. RUTAS PÚBLICAS (No llevan candado) ---
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'categorias', component: CategoriaListaComponent },
-  { path: 'categorias/new', component: CategoriaFormComponent },
-  { path: 'categorias/edit/:id', component: CategoriaFormComponent },
-  { path: 'usuarios', component: UsuarioListaComponent },
-  { path: 'pedidos', component: PedidoListaComponent },
-  { path: 'pedidos/new', component: PedidoFormComponent },
-  { path: 'detalles', component: DetallePedidoListaComponent }
+
+  // --- 2. RUTAS PRIVADAS (Todas llevan el canActivate) ---
+  { path: 'products', component: ProductListComponent, canActivate: [authGuard] },
+  { path: 'products/new', component: ProductFormComponent, canActivate: [authGuard] },
+  { path: 'products/edit/:id', component: ProductFormComponent, canActivate: [authGuard] },
+  
+  { path: 'categorias', component: CategoriaListaComponent, canActivate: [authGuard] },
+  { path: 'categorias/new', component: CategoriaFormComponent, canActivate: [authGuard] },
+  { path: 'categorias/edit/:id', component: CategoriaFormComponent, canActivate: [authGuard] },
+  
+  { path: 'usuarios', component: UsuarioListaComponent, canActivate: [authGuard] },
+  { path: 'usuarios/edit/:id', component: UsuarioFormComponent, canActivate: [authGuard] },
+  
+  { path: 'pedidos', component: PedidoListaComponent, canActivate: [authGuard] },
+  { path: 'pedidos/new', component: PedidoFormComponent, canActivate: [authGuard] },
+  
+  { path: 'detalles', component: DetallePedidoListaComponent, canActivate: [authGuard] },
+
+  // --- 3. REDIRECCIÓN POR DEFECTO ---
+  // Si alguien entra a la raíz (localhost:4200 sin nada), lo mandamos al login directo.
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'tienda', component: TiendaComponent },
+  { path: 'mis-pedidos', component: MisPedidosComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

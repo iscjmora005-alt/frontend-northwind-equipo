@@ -16,12 +16,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
 
     NavbarComponent,
+     
+      
+      
       
       
      

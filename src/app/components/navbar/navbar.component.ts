@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  // ... tus otros imports si es standalone
+  // ... (deja los imports que ya tengas aquí)
+  templateUrl: './navbar.component.html'
 })
-export class NavbarComponent implements OnInit {
-  usuarioActual: any = null;
+export class NavbarComponent {
 
-  ngOnInit() {
-    // Al cargar el navbar, buscamos en el localStorage
-    const usuarioGuardado = localStorage.getItem('usuario');
-    if (usuarioGuardado) {
-      this.usuarioActual = JSON.parse(usuarioGuardado);
-    }
+  // Inyectamos el Router para poder redireccionar al login
+  constructor(private router: Router) {}
+
+  // 1. Aquí definimos usuarioActual para quitar las líneas rojas de los *ngIf
+  get usuarioActual() {
+    // Leemos la sesión del navegador. (Asegúrate de que 'usuario' sea la palabra que usas al hacer el Login)
+    const usuarioGuardado = localStorage.getItem('usuario'); 
+    return usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
   }
 
+  // 2. Aquí definimos la función para quitar la línea roja del (click)
   cerrarSesion() {
-    localStorage.removeItem('usuario');
-    this.usuarioActual = null;
-    window.location.href = '/login';
+    localStorage.removeItem('usuario'); // Borra los datos
+    this.router.navigate(['/login']);   // Te patea a la pantalla de inicio
   }
 }

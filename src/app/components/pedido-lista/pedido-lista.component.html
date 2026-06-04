@@ -22,7 +22,7 @@
         <td>{{ pedido.fecha | date:'shortDate' }}</td>
         <td>{{ pedido.total | currency }}</td>
         <td>
-          <button class="btn btn-info btn-sm text-white">Ver Detalle</button>
+          <a class="btn btn-info btn-sm text-white" routerLink="/detalles">Ver Detalles</a>
         </td>
       </tr>
       

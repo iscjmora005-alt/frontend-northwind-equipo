@@ -3,25 +3,21 @@
     <a class="navbar-brand" href="#">Northwind CRUD</a>
     
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Productos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/categorias">Categorías</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" routerLink="/pedidos">Pedidos</a>
-         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/products/new">Nuevo Producto</a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" routerLink="/detalles">Detalles</a>
-        </li>
+      
+      <ul class="navbar-nav" *ngIf="usuarioActual">
+        
+        <ng-container *ngIf="usuarioActual.rol === 'ADMIN'">
+          <li class="nav-item"><a class="nav-link" routerLink="/products">Inventario</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/categorias">Categorías</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/usuarios">Usuarios</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/pedidos">Ventas Totales</a></li>
+        </ng-container>
+
+        <ng-container *ngIf="usuarioActual.rol === 'CLIENTE'">
+          <li class="nav-item"><a class="nav-link text-warning fw-bold" routerLink="/tienda">🏪 Ir a la Tienda</a></li>
+<li class="nav-item"><a class="nav-link" routerLink="/mis-pedidos">Mis Pedidos</a></li>
+          </ng-container>
+
       </ul>
 
       <div class="d-flex ms-auto align-items-center text-white pr-3">
