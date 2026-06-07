@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'pedidos', component: PedidoListaComponent, canActivate: [authGuard] },
   { path: 'pedidos/new', component: PedidoFormComponent, canActivate: [authGuard] },
   
-  { path: 'detalles', component: DetallePedidoListaComponent, canActivate: [authGuard] },
+  { path: 'detalles/:id', component: DetallePedidoListaComponent, canActivate: [authGuard] },
 
   // --- 3. REDIRECCIÓN POR DEFECTO ---
   // Si alguien entra a la raíz (localhost:4200 sin nada), lo mandamos al login directo.

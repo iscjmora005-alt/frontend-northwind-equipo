@@ -1,30 +1,37 @@
 <div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Detalles de los Pedidos</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>🔍 Detalles del Ticket #{{ pedidoId }}</h2>
+    <button class="btn btn-secondary" routerLink="/pedidos">Volver a Ventas Totales</button>
   </div>
 
-  <table class="table table-striped table-hover shadow-sm">
-    <thead class="table-dark">
-      <tr>
-        <th>ID Detalle</th>
-        <th>ID Pedido</th>
-        <th>ID Producto</th>
-        <th>Cantidad</th>
-        <th>Precio Unitario</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let det of detalles">
-        <td>{{ det.id }}</td>
-        <td>#{{ det.pedido_id }}</td>
-        <td>Prod. #{{ det.producto_id }}</td>
-        <td>{{ det.cantidad }}</td>
-        <td>{{ det.precio | currency }}</td>
-      </tr>
-      
-      <tr *ngIf="detalles.length === 0">
-        <td colspan="5" class="text-center text-muted">No hay detalles registrados.</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="card shadow">
+    <div class="card-body">
+      <table class="table table-striped table-hover mt-3">
+        <thead class="table-dark">
+          <tr>
+            <th>Producto Vendido</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of detalles">
+            <td class="fw-bold">{{ item.producto }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.precio | currency }}</td>
+            <td class="text-success fw-bold">{{ item.subtotal | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-warning text-center" *ngIf="detalles.length === 0">
+        No se encontraron productos para este pedido.
+      </div>
+    </div>
+    
+    <div class="card-footer bg-light text-end fs-4 fw-bold">
+      Total de la Venta: <span class="text-primary">{{ totalPedido | currency }}</span>
+    </div>
+  </div>
 </div>
